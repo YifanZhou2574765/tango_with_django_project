@@ -12,20 +12,20 @@ def populate():
     # through each data structure, and add the data to our models.
 
     python_pages = [
-        {'title': 'Official Python Tutorial', 'url':'http://docs.python.org/3/tutorial/'}, 
-        {'title':'How to Think like a Computer Scientist', 'url':'http://www.greenteapress.com/thinkpython/'}, 
-        {'title':'Learn Python in 10 Minutes', 'url':'http://www.korokithakis.net/tutorials/python/'} 
+        {'title': 'Official Python Tutorial', 'url':'http://docs.python.org/3/tutorial/', 'views':50}, 
+        {'title':'How to Think like a Computer Scientist', 'url':'http://www.greenteapress.com/thinkpython/', 'views': 68}, 
+        {'title':'Learn Python in 10 Minutes', 'url':'http://www.korokithakis.net/tutorials/python/', 'views':128} 
     ]
 
     django_pages = [
-        {'title':'Official Django Tutorial', 'url':'https://docs.djangoproject.com/en/2.1/intro/tutorial01/'}, 
-        {'title':'Django Rocks', 'url':'http://www.djangorocks.com/'}, 
-        {'title':'How to Tango with Django', 'url':'http://www.tangowithdjango.com/'} 
+        {'title':'Official Django Tutorial', 'url':'https://docs.djangoproject.com/en/2.1/intro/tutorial01/', 'views':182}, 
+        {'title':'Django Rocks', 'url':'http://www.djangorocks.com/', 'views':48}, 
+        {'title':'How to Tango with Django', 'url':'http://www.tangowithdjango.com/', 'views':99} 
     ]
 
     other_pages = [
-        {'title':'Bottle', 'url':'http://bottlepy.org/docs/dev/'}, 
-        {'title':'Flask', 'url':'http://flask.pocoo.org'} 
+        {'title':'Bottle', 'url':'http://bottlepy.org/docs/dev/', 'views':32}, 
+        {'title':'Flask', 'url':'http://flask.pocoo.org', 'views':86} 
     ]
 
     cats = {'Python': {'pages': python_pages, 'views': python_pages, 'likes': python_pages},
@@ -41,7 +41,7 @@ def populate():
     for cat, cat_data in cats.items():
         c = add_cat(cat) 
         for p in cat_data['pages']:
-            add_page(c, p['title'], p['url']) 
+            add_page(c, p['title'], p['url'], p['views']) 
         
         add_cat('Python', 128, 64) 
         add_cat('Django', 64, 32) 
@@ -55,7 +55,7 @@ def populate():
                 print(f'- {c}: {p}') 
 
 
-def add_page(cat, title, url, views=0):
+def add_page(cat, title, url, views):
     p = Page.objects.get_or_create(category=cat, title=title)[0] 
     p.url=url 
     p.views=views 
